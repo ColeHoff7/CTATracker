@@ -25,6 +25,8 @@ class Arrivals():
         for belArrival in belmontArrivals:
             mins = self.getMinsTilArrival(belArrival)
             if mins > self.timeToWalkToBelmont: 
+                if belArrival["destNm"] == '95th/Dan Ryan':
+                    belArrival["destNm"] = '95th/DR'
                 belmontTimes.append(f'{belArrival["destNm"]} {mins}min')
 
         for spArrival in southportArrivals:
