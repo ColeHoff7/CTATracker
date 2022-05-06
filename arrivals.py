@@ -1,11 +1,15 @@
 import requests
-import json 
+import json
+import os
 from datetime import datetime
 
 
 class Arrivals():
     def __init__(self):
-        with open('apikey.json') as f:
+        script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+        rel_path = "apikey.json"
+        abs_file_path = os.path.join(script_dir, rel_path)
+        with open(abs_file_path) as f:
             self.key = json.load(f)['key']
 
         self.belmontId = '41320'

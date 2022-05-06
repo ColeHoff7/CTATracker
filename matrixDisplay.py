@@ -5,6 +5,7 @@ from PIL import Image
 import time
 import sys
 import random
+import os
 
 class RunText():
     def __init__(self):
@@ -19,12 +20,18 @@ class RunText():
         
         self.arrivals = Arrivals()
         self.matrix = RGBMatrix(options=options)
-        self.image = Image.open('./sprites/ctav1.png').convert('RGB')
+        script_dir = os.path.dirname(__file__)
+        rel_path = "sprites/ctav1.png"
+        abs_file_path = os.path.join(script_dir, rel_path)
+
+        self.image = Image.open(abs_file_path).convert('RGB')
 
     def run(self):
         offscreen_canvas = self.matrix.CreateFrameCanvas()
         font = graphics.Font()
-        font.LoadFont("./fonts/5x8.bdf")
+        script_dir = os.path.dirname(__file__)
+        abs_font_path = os.path.join(script_dir, 'fonts/5x8.bdf')
+        font.LoadFont(abs_font_path)
         textColor = graphics.Color(255, 0, 0)
         showBelmont = False
         img_width, img_height = self.image.size
