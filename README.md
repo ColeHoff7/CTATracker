@@ -4,7 +4,7 @@ This is a project for tracking the CTA stations nearest me so I can display them
 ![](https://github.com/ColeHoff7/CTATracker/blob/main/traintracker.gif)
 
 # Requirements
-You will need to get an API key from the Chicago Transit Authority [here](https://www.transitchicago.com/developers/traintrackerapply/) This will go in the blank `apikey.json` in the root directory of this project
+You will need to get an API key from the Chicago Transit Authority [here](https://www.transitchicago.com/developers/traintrackerapply/) This will go in a file `apikey.json` in the `src` directory of this project
 
 ### This project uses the following:
  - a Raspberry Pi (any version should do, I am using a raspberry pi 2)
@@ -15,3 +15,8 @@ You will need to get an API key from the Chicago Transit Authority [here](https:
 ### RGB Board libraries
 This project makes use of the [Adafruit RGB matrix installer script](https://github.com/adafruit/Raspberry-Pi-Installer-Scripts/blob/main/rgb-matrix.sh) to install the needed libraries to interface with the RGB board. At the moment you need to install this on your pi yourself, but I plan on writing an install script that will do all of this in the future
 
+
+# TODO in the future:
+- automated install on raspberry pis
+- google maps integration to automatically get nearest stations
+- bus support

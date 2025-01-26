@@ -1,0 +1,14 @@
+{
+    "stations": [{
+        "id": "40360",
+        "cutoffTime": 6,
+        "line": "Brn"
+    },{
+        "id":"41320",
+        "cutoffTime": 11,
+        "line": "Red"
+    }],
+    "colors": {
+
+    }
+}

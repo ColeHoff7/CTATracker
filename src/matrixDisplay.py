@@ -6,6 +6,7 @@ import time
 import sys
 import random
 import os
+from constants import Colors
 
 class RunText():
     def __init__(self):
@@ -21,8 +22,7 @@ class RunText():
         self.arrivals = Arrivals()
         self.matrix = RGBMatrix(options=options)
         script_dir = os.path.dirname(__file__)
-        rel_path = "sprites/ctav1.png"
-        abs_file_path = os.path.join(script_dir, rel_path)
+        abs_file_path = os.path.join(script_dir, "sprites/ctav1.png")
 
         self.image = Image.open(abs_file_path).convert('RGB')
 
@@ -32,23 +32,20 @@ class RunText():
         script_dir = os.path.dirname(__file__)
         abs_font_path = os.path.join(script_dir, 'fonts/5x8.bdf')
         font.LoadFont(abs_font_path)
-        textColor = graphics.Color(255, 0, 0)
-        showBelmont = False
+        curr_station = 0
+        stations_len = len(self.arrivals.stations)
         img_width, img_height = self.image.size
         pos = 0
         iterator = -1
         ypos = 0
         while True:
             move = True
-            [southport, belmont] = self.arrivals.getArrivalTimes() 
-            if showBelmont:
-                textColor = graphics.Color(255, 0, 0)
-                topText = belmont[0] if len(belmont) > 0 else 'No Trains'
-                bottomText = belmont[1] if len(belmont) > 1 else ''
-            else:
-                textColor = graphics.Color(180, 90, 5)
-                topText = southport[0] if len(southport) > 0 else 'No Trains'
-                bottomText = southport[1] if len(southport) > 1 else ''
+            station = self.arrivals.stations[curr_station]
+            arrival_times = self.arrivals.getArrivalTimes(station)
+            text_color = graphics.Color(**Colors.get(station['line'], (255,255,255)))
+            topText = arrival_times[0] if len(arrival_times) > 0 else 'No Trains'
+            bottomText = arrival_times[1] if len(arrival_times) > 1 else ''
+            
             while move:
                 offscreen_canvas.Clear()
                 r = random.randint(0,100)
@@ -73,7 +70,7 @@ class RunText():
                         move = False
             time.sleep(1)
             offscreen_canvas.Clear()
-            showBelmont = not showBelmont
+            curr_station = (curr_station + 1) % stations_len
             iterator *= -1
 
     def process(self):
